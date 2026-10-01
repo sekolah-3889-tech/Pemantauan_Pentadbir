@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | Portal SAKTI</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background:
+                linear-gradient(
+                    rgba(4, 18, 38, 0.90),
+                    rgba(4, 18, 38, 0.95)
+                );
+
+            color: white;
+        }
+
+        /* KOTAK LOGIN */
+        .login-container {
+            width: 90%;
+            max-width: 420px;
+
+            padding: 40px 35px;
+
+            background: rgba(255, 255, 255, 0.08);
+
+            border: 1px solid rgba(255, 255, 255, 0.2);
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.4);
+
+            text-align: center;
+        }
+
+        /* LOGO */
+        .logo {
+            width: 100px;
+            height: 100px;
+
+            object-fit: contain;
+
+            background: white;
+
+            border-radius: 50%;
+
+            padding: 8px;
+
+            margin-bottom: 20px;
+        }
+
+        /* NAMA SEKOLAH */
+        .school-name {
+            font-size: 14px;
+
+            color: #d9b45b;
+
+            font-weight: bold;
+
+            letter-spacing: 1px;
+
+            line-height: 1.5;
+
+            margin-bottom: 8px;
+        }
+
+        /* TAJUK */
+        h1 {
+            font-size: 30px;
+
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #cbd5e1;
+
+            font-size: 14px;
+
+            margin-bottom: 30px;
+        }
+
+        /* INPUT */
+        .input-group {
+            text-align: left;
+
+            margin-bottom: 18px;
+        }
+
+        .input-group label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            font-size: 14px;
+
+            color: #e2e8f0;
+        }
+
+        .input-group input {
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            font-size: 15px;
+        }
+
+        .input-group input:focus {
+            box-shadow: 0 0 0 2px #d9b45b;
+        }
+
+        /* BUTANG */
+        .login-button {
+            width: 100%;
+
+            padding: 14px;
+
+            margin-top: 8px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #d9b45b;
+
+            color: #071a33;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .login-button:hover {
+            background: #f0cf76;
+
+            transform: translateY(-2px);
+        }
+
+        /* ERROR */
+        #error-message {
+            display: none;
+
+            margin-top: 15px;
+
+            color: #ffb4b4;
+
+            font-size: 14px;
+        }
+
+        /* FOOTER */
+        .footer {
+            margin-top: 25px;
+
+            color: #94a3b8;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <div class="login-container">
+
+        <!-- LOGO SEKOLAH -->
+        <!-- Jika belum ada logo, bahagian ini boleh dibuang -->
+
+        <img
+            src="LOGO_SAKTI.png"
+            alt="Logo SAKTI"
+            class="logo"
+        >
+
+
+        <!-- NAMA SEKOLAH -->
+
+        <div class="school-name">
+            SEKOLAH MENENGAH SAINS KOTA TINGGI
+        </div>
+
+
+        <!-- TAJUK -->
+
+        <h1>
+            Portal SAKTI
+        </h1>
+
+        <div class="subtitle">
+            Pemantauan Pentadbir
+        </div>
+
+
+        <!-- ID PENGGUNA -->
+
+        <div class="input-group">
+
+            <label for="username">
+                ID Pengguna
+            </label>
+
+            <input
+                type="text"
+                id="username"
+                placeholder="Masukkan ID pengguna"
+            >
+
+        </div>
+
+
+        <!-- PASSWORD -->
+
+        <div class="input-group">
+
+            <label for="password">
+                Kata Laluan
+            </label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Masukkan kata laluan"
+            >
+
+        </div>
+
+
+        <!-- BUTANG LOGIN -->
+
+        <button
+            class="login-button"
+            onclick="login()"
+        >
+            LOG MASUK
+        </button>
+
+
+        <!-- MESEJ SALAH -->
+
+        <div id="error-message">
+            ID pengguna atau kata laluan tidak betul.
+        </div>
+
+
+        <!-- FOOTER -->
+
+        <div class="footer">
+
+            Akses terhad kepada Pentadbir Sekolah<br>
+            © 2026 SAKTI
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+        /* =====================================
+           ID DAN KATA LALUAN
+           PUAN BOLEH TUKAR DI SINI
+        ===================================== */
+
+        const USERNAME = "admin";
+
+        const PASSWORD = "sakti123";
+
+
+        /* =====================================
+           LINK DASHBOARD SEDIA ADA
+        ===================================== */
+
+        const DASHBOARD_URL =
+            "https://sakti-pemantauan-one.vercel.app/rekod-baharu";
+
+
+        /* =====================================
+           FUNGSI LOGIN
+        ===================================== */
+
+        function login() {
+
+            const username =
+                document.getElementById("username").value.trim();
+
+            const password =
+                document.getElementById("password").value;
+
+
+            /* SEMAK ID DAN PASSWORD */
+
+            if (
+                username === USERNAME &&
+                password === PASSWORD
+            ) {
+
+                /*
+                 LOGIN BERJAYA
+                 TERUS KE DASHBOARD
+                */
+
+                window.location.href = DASHBOARD_URL;
+
+            } else {
+
+                /*
+                 LOGIN GAGAL
+                */
+
+                document.getElementById(
+                    "error-message"
+                ).style.display = "block";
+
+            }
+
+        }
+
+
+        /* =====================================
+           TEKAN ENTER UNTUK LOGIN
+        ===================================== */
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (event.key === "Enter") {
+
+                    login();
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+</body>
+</html>
