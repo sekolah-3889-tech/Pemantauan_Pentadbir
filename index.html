@@ -129,6 +129,32 @@
             box-shadow: 0 0 0 2px #d9b45b;
         }
 
+        /* RUANGAN PASSWORD + IKON MATA */
+        .password-row {
+            display: flex;
+            align-items: stretch;
+            gap: 8px;
+        }
+
+        .password-row input {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .toggle-password {
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 10px;
+            padding: 0 13px;
+            background: rgba(255, 255, 255, 0.12);
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .toggle-password:hover {
+            background: rgba(255, 255, 255, 0.22);
+        }
+
         /* BUTANG */
         .login-button {
             width: 100%;
@@ -244,11 +270,22 @@
                 Kata Laluan
             </label>
 
-            <input
-                type="password"
-                id="password"
-                placeholder="Masukkan kata laluan"
-            >
+            <div class="password-row">
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Masukkan kata laluan"
+                    autocomplete="current-password"
+                >
+                <button
+                    type="button"
+                    class="toggle-password"
+                    id="togglePassword"
+                    onclick="togglePassword()"
+                    aria-label="Lihat kata laluan"
+                    title="Lihat atau sembunyikan kata laluan"
+                >👁</button>
+            </div>
 
         </div>
 
@@ -301,6 +338,26 @@
 
         const DASHBOARD_URL =
             "https://sakti-pemantauan-one.vercel.app/rekod-baharu";
+
+
+        /* =====================================
+           LIHAT / SEMBUNYIKAN KATA LALUAN
+        ===================================== */
+
+        function togglePassword() {
+            const field = document.getElementById("password");
+            const button = document.getElementById("togglePassword");
+
+            if (field.type === "password") {
+                field.type = "text";
+                button.textContent = "🙈";
+                button.setAttribute("aria-label", "Sembunyikan kata laluan");
+            } else {
+                field.type = "password";
+                button.textContent = "👁";
+                button.setAttribute("aria-label", "Lihat kata laluan");
+            }
+        }
 
 
         /* =====================================
